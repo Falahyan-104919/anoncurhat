@@ -5,39 +5,35 @@ module.exports = {
     await queryInterface.sequelize.query(
       'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
     );
-    await queryInterface.createTable('users', {
-      id_user: {
+    await queryInterface.createTable('posts', {
+      id_post: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
       },
-      username: {
-        type: Sequelize.STRING,
+      content: {
         allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING(1234),
-        allowNull: false,
-      },
-      gender: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      role: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: 'user',
-      },
-      date_of_birth: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
+        type: Sequelize.TEXT,
       },
       active: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        type: Sequelize.BOOLEAN,
+      },
+      count_likes: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      count_comments: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      user_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'users',
+          key: 'id_user',
+        },
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('Posts');
   },
 };

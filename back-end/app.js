@@ -11,5 +11,10 @@ app.use(cors());
 
 app.listen(port, async () => {
   console.log(`Server is Running on Port : ${port} `);
+<<<<<<< HEAD
   // await connectDb();
 });
+=======
+  await connectDb();
+});
+>>>>>>> features/comment_model_migrations

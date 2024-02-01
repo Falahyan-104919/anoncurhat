@@ -43,7 +43,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+<<<<<<< HEAD
       modelName: 'posts',
+=======
+      modelName: 'post',
+>>>>>>> features/comment_model_migrations
     }
   );
   return Post;

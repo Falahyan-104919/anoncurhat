@@ -1,38 +1,23 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "falahyan",
     "password": null,
-=======
-    "username": "postgres",
-    "password": "panorama3",
->>>>>>> features/comment_model_migrations
     "database": "anon_curhat",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port": 5432
   },
   "test": {
-<<<<<<< HEAD
     "username": "falahyan",
     "password": null,
-=======
-    "username": "postgres",
-    "password": "panorama3",
->>>>>>> features/comment_model_migrations
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port": 5432
   },
   "production": {
-<<<<<<< HEAD
     "username": "falahyan",
     "password": null,
-=======
-    "username": "postgres",
-    "password": "panorama3",
->>>>>>> features/comment_model_migrations
     "database": "database_production",
     "dialect": "postgres",
     "port": 5432

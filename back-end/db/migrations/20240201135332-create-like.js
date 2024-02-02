@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.sequelize.query(
       'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
     );
-    await queryInterface.createTable('likes', {
+    await queryInterface.createTable('Likes', {
       id_like: {
         allowNull: false,
         primaryKey: true,
@@ -19,14 +19,14 @@ module.exports = {
       user_id: {
         type: Sequelize.UUID,
         references: {
-          model: 'users',
+          model: 'Users',
           key: 'id_user',
         },
       },
       post_id: {
         type: Sequelize.UUID,
         references: {
-          model: 'posts',
+          model: 'Posts',
           key: 'id_post',
         },
       },
@@ -41,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('likes');
+    await queryInterface.dropTable('Likes');
   },
 };

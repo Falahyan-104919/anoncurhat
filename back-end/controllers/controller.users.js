@@ -38,7 +38,7 @@ const createUser = async (req, res) => {
     const isUnique = await db.Users.findOne({
       where: {
         username: {
-          [Op.iLike]: `%orangorangan2%`,
+          [Op.iLike]: `%${username}%`,
         },
       },
     });

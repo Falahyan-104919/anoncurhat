@@ -30,16 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: true,
       },
-      count_likes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
-      count_comments: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
       user_id: {
         type: DataTypes.UUID,
         references: {

@@ -1,12 +1,15 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class users extends Model {
+  class Users extends Model {
     static associate(models) {
       // associations can be defined here
+      this.hasMany(models.Post, { foreignKey: 'user_id' });
+      this.hasMany(models.Comments, { foreignKey: 'user_id' });
+      this.hasMany(models.Likes, { foreignKey: 'user_id' });
     }
   }
-  users.init(
+  Users.init(
     {
       id_user: {
         primaryKey: true,
@@ -44,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'users',
+      modelName: 'Users',
     }
   );
-  return users;
+  return Users;
 };

@@ -1,12 +1,16 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Posts extends Model {
     static associate(models) {
       // define association here
+      this.belongsTo(models.Users, { foreignKey: 'user_id' });
+      this.hasMany(models.Comments, { foreignKey: 'post_id' });
+      this.hasMany(models.Likes, { foreignKey: 'post_id' });
+      this.hasMany(models.Reports, { foreignKey: 'post_id' });
     }
   }
-  Post.init(
+  Posts.init(
     {
       id_post: {
         primaryKey: true,
@@ -43,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'posts',
+      modelName: 'Posts',
     }
   );
-  return Post;
+  return Posts;
 };

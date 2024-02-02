@@ -5,11 +5,11 @@ const { Op } = require('sequelize');
 const getUsers = async (req, res) => {
   try {
     const users = await db.Users.findAll();
-    return res.status(200).json(users);
+    res.status(200).json(users);
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      success: false,
+      message: 'Internal Server Error',
     });
   }
 };

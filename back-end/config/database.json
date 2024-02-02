@@ -10,7 +10,7 @@
   "test": {
     "username": "falahyan",
     "password": null,
-    "database": "database_test",
+    "database": "anon_curhat",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port": 5432
@@ -18,7 +18,7 @@
   "production": {
     "username": "falahyan",
     "password": null,
-    "database": "database_production",
+    "database": "anon_curhat",
     "dialect": "postgres",
     "port": 5432
   }

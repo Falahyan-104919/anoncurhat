@@ -10,12 +10,11 @@ const {
   changePassword,
 } = require('../controllers/controller.users');
 
-router.use('users/');
-router.get(getUsers);
-router.get(':id', getUserById);
-router.post(createUser);
-router.put(':id', updateUser);
-router.delete(':id', deleteUser);
-router.put('change_password/:id', changePassword);
+router.get('/users', getUsers);
+router.get('/users/:id', getUserById);
+router.post('/users', createUser);
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
+router.put('/users/change_password/:id', changePassword);
 
 module.exports = router;

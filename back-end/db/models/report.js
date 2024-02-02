@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class comment extends Model {
+  class Report extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  comment.init(
+  Report.init(
     {
-      id_comment: {
+      id_report: {
         primaryKey: true,
         type: DataTypes.UUID,
         allowNull: false,
         defaultValue: sequelize.literal('uuid_generate_v4()'),
       },
-      content: {
+      description: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
@@ -28,35 +28,19 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: true,
       },
-      count_likes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
-      count_comments: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
-      user_id: {
+      report_type_id: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
-          model: 'users',
-          key: 'id_user',
-        },
-      },
-      post_id: {
-        type: DataTypes.UUID,
-        references: {
-          model: 'posts',
-          key: 'id_post',
+          model: 'report_type',
+          key: 'id_report_type',
         },
       },
     },
     {
       sequelize,
-      modelName: 'comments',
+      modelName: 'reports',
     }
   );
-  return comment;
+  return Report;
 };

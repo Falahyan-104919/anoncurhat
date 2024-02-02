@@ -3,6 +3,7 @@ const express = require('express');
 const port = process.env.DEV_PORT;
 const cors = require('cors');
 const app = express();
+const { login } = require('./controllers/controller.auth');
 const { connectDb } = require('./db/db');
 
 app.use(express.json());
@@ -12,4 +13,5 @@ app.use(cors());
 app.listen(port, async () => {
   console.log(`Server is Running on Port : ${port} `);
   // await connectDb();
+  // login();
 });

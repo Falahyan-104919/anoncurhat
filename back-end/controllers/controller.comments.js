@@ -8,6 +8,10 @@ const getComments = async (req, res) => {
         post_id: post_id,
         active: true,
       },
+      include: {
+        model: db.Users,
+        attributes: { exclude: ['password', 'updatedAt', 'createdAt'] },
+      },
     });
     res.status(200).json(comments);
   } catch (err) {

@@ -1,8 +1,7 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(
-  'postgres://postgres:panorama3@127.0.0.1:5432/anon_curhat'
-);
+const sequelize = new Sequelize(process.env.FALAHYAN_DB_URI);
 
 const connectDb = async () => {
   try {

@@ -5,9 +5,10 @@ const {
   getReports,
   deleteReport,
 } = require('../controllers/controller.reports');
+const { verifyToken } = require('../middleware/authToken');
 
 router.get('/reports', getReports);
-router.post('/reports', createReport);
-router.delete('/reports/:id', deleteReport);
+router.post('/reports', verifyToken, createReport);
+router.delete('/reports/:id', verifyToken, deleteReport);
 
 module.exports = router;

@@ -7,11 +7,12 @@ const {
   deletePost,
   updatePost,
 } = require('../controllers/controller.posts');
+const { verifyToken } = require('../middleware/authToken');
 
 router.get('/posts', getPosts);
 router.get('/posts/:id', getPostById);
-router.post('/posts', createPost);
-router.put('/posts', updatePost);
-router.delete('/posts/:id', deletePost);
+router.post('/posts', verifyToken, createPost);
+router.put('/posts', verifyToken, updatePost);
+router.delete('/posts/:id', verifyToken, deletePost);
 
 module.exports = router;

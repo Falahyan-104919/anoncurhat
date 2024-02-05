@@ -26,6 +26,18 @@ const createComments = async (req, res) => {
   try {
     const { post_id, user_id, content } = req.body;
     await db.Comments.create({ post_id, user_id, content });
+    const { count } = await db.Comments.findAndCountAll({
+      where: {
+        post_id: post_id,
+      },
+    });
+    await db.Posts.update(
+      { count_comments: count },
+      { where: { id_post: post_id } }
+    );
+    res.status(200).json({
+      message: 'Comment successfull Added',
+    });
     res.status(200).json({
       message: 'Comment successfull added with ',
     });

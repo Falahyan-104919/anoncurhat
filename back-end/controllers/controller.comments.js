@@ -6,6 +6,7 @@ const getComments = async (req, res) => {
     const comments = await db.Comments.findAll({
       where: {
         post_id: post_id,
+        active: true,
       },
     });
     res.status(200).json(comments);

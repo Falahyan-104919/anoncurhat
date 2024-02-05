@@ -24,7 +24,15 @@ const getPosts = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    const posts = await db.Posts.findAll();
+    const posts = await db.Posts.findAll({
+      where: {
+        active: true,
+      },
+      include: {
+        model: db.Users,
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+      },
+    });
     const result = {
       posts: posts.slice(startIndex, endIndex),
       page: page,
@@ -44,7 +52,13 @@ const getPosts = async (req, res) => {
 const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await db.Posts.findOne({ where: { id_post: id } });
+    const post = await db.Posts.findOne({
+      where: { id_post: id },
+      include: {
+        model: db.Users,
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+      },
+    });
     if (!post) {
       return res.status(404).json({
         message: 'Posts is Not Found',

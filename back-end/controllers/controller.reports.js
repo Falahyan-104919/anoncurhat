@@ -25,8 +25,12 @@ const getReports = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    const reports = await db.Reports.findAndCountAll({
+    const reports = await db.Reports.findAll({
       where: { active: true },
+      include: [
+        { model: db.Posts, attributes: ['content'] },
+        { model: db.Report_type, attributes: ['name'] },
+      ],
     });
     const results = {
       reports: reports.slice(startIndex, endIndex),

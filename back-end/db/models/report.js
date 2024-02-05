@@ -30,11 +30,19 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: true,
       },
+      post_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: 'Posts',
+          key: 'id_post',
+        },
+      },
       report_type_id: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'report_type',
+          model: 'Report_types',
           key: 'id_report_type',
         },
       },

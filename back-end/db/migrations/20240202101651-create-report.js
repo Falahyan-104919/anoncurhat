@@ -18,6 +18,14 @@ module.exports = {
         allowNull: false,
         defaultValue: true,
       },
+      post_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Posts',
+          key: 'id_post',
+        },
+      },
       report_type_id: {
         type: Sequelize.UUID,
         allowNull: false,

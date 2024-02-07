@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './index.css';
+import Home from './pages/Home';
+import CurhatanList from './features/curhatan-list/CurhatanList';
 
 function App() {
   return (
-    <div className="bg-zinc-950">
-      <h1 className="scroll-m-20 text-4xl font-extrabold text-white tracking-tight lg:text-5xl">
-        Shadcn/UI
-      </h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />}>
+        <Route index element={<CurhatanList />} />
+      </Route>
+    </Routes>
   );
 }
 

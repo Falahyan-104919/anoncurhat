@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import Home from './pages/Home';
-import CurhatanList from './features/curhatan-list/CurhatanList';
+import CurhatanListContainer from './features/curhatan-list/CurhatanListContainer';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />}>
-        <Route index element={<CurhatanList />} />
+        <Route index element={<CurhatanListContainer />} />
       </Route>
     </Routes>
   );

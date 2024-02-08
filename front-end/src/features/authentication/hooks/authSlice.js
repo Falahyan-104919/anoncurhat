@@ -28,9 +28,8 @@ export const authSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
-      Object.keys(state).forEach((key) => {
-        state[key] = initialState[key];
-      });
+      localStorage.removeItem('authState');
+      Object.assign(state, initialState);
     },
   },
   extraReducers: (builder) => {
@@ -41,7 +40,10 @@ export const authSlice = createSlice({
       state.username = user_data['username'];
       state.gender = user_data['gender'];
       state.age = calculateAge(user_data['date_of_birth']);
+      state.role = user_data['role'];
       axiosInstance.defaults.headers.common['Authorization'] = token;
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem('authState', serializedState);
     });
   },
 });

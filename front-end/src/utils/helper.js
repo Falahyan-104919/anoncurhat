@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const calculateAge = (dateOfBirthString) => {
   const dob = new Date(dateOfBirthString);
   const now = new Date();
@@ -10,4 +12,12 @@ const calculateAge = (dateOfBirthString) => {
   return age;
 };
 
-export { calculateAge };
+const capitalizeGender = (str) => {
+  return str[0].toUpperCase() + str.substring(1) + ', ';
+};
+
+const getMoment = (time) => {
+  return moment(time).fromNow();
+};
+
+export { calculateAge, capitalizeGender, getMoment };

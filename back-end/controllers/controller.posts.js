@@ -21,7 +21,7 @@ const createPost = async (req, res) => {
 const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 12;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
     const posts = await db.Posts.findAll({

@@ -1,24 +1,36 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { calculateAge, capitalizeGender, getMoment } from '@/utils/helper';
+import { User } from 'lucide-react';
+import CurhatActionButton from './ActionButton';
 
 export default function CurhatanCard({ post }) {
   return (
-    <Card>
+    <Card className="flex flex-col justify-between h-[255px]">
       <CardHeader>
-        <CardTitle>{post['User'].gender}</CardTitle>
-        {/* <CardDescription>Card Description</CardDescription> */}
+        <CardTitle className="flex gap-4 h-fit items-center">
+          <User size="40px" />
+          <div className="flex flex-col">
+            <div>
+              {capitalizeGender(post['User'].gender)}
+              {calculateAge(post['User'].date_of_birth)}
+            </div>
+            <div className="text-sm text-gray-500">
+              {getMoment(post['createdAt'])}
+            </div>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <p>{post.content}</p>
+        <div className="line-clamp-3">{post.content}</div>
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
+      <CardFooter className="flex items-center border-t-2 border-slate-500 border-solid">
+        <CurhatActionButton post={post} />
       </CardFooter>
     </Card>
   );

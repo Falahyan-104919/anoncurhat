@@ -10,7 +10,7 @@ export default function CurhatanList() {
   });
   return (
     <div className="flex flex-row flex-wrap flex-grow-0 p-8 gap-8 items-center justify-center bg-zinc-950">
-      {isLoading ? (
+      {!isLoading ? (
         data['posts'].map((items, index) => {
           return <CurhatanCard key={index} post={items} />;
         })

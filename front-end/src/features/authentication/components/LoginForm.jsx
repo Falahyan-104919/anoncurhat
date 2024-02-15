@@ -20,13 +20,24 @@ export default function LoginForm() {
     username: '',
     password: '',
   };
-  const handleSubmit = (values) => {
-    dispatch(login(values));
-    return toast({
-      variant: 'success',
-      title: 'Logged In ✅ ',
-      description: 'Authentication is Success!',
-    });
+  const handleSubmit = (values, actions) => {
+    dispatch(login(values))
+      .then((res) => {
+        const { requestStatus } = res.meta;
+        if (requestStatus == 'fulfilled') {
+          return toast({
+            title: 'Authentication Successfull',
+            description: `Welcome back ${res.meta.arg['username']}!`,
+            variant: 'success',
+          });
+        }
+        return toast({
+          title: 'Authentication Failed',
+          variant: 'error',
+        });
+      })
+      .catch((err) => console.log('error block, ', err));
+    actions.resetForm();
   };
   return (
     <Formik

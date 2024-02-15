@@ -18,9 +18,9 @@ export default function CurhatanListContainer() {
     queryFn: getCurhatan,
   });
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 p-16 items-center h-fit bg-zinc-950 ">
+    <div className="grid grid-cols-3 sm:flex-row gap-8 p-16 items-center h-full bg-zinc-950">
       <CurhatanList loading={isLoading} data={data} />
-      <div className="col-span-3">
+      <div className="col-span-3 sm:w-full">
         <Pagination>
           <PaginationContent className="bg-white">
             <PaginationItem>

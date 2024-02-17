@@ -14,7 +14,7 @@ export default function CreateCurhatForm({ toggleOff }) {
   const authState = useSelector((state) => state.auth);
   const queryClient = useQueryClient();
   const { user_id } = authState;
-  const { mutate } = useMutation({
+  const { mutate, isError } = useMutation({
     mutationKey: ['curhat', user_id],
     mutationFn: (values) => postCurhatan(values),
     onSuccess: () => {
@@ -39,6 +39,13 @@ export default function CreateCurhatForm({ toggleOff }) {
       content: values.content,
     };
     mutate(payload);
+    if (isError) {
+      return toast({
+        title: 'Post Curhat Successfull',
+        variant: 'error',
+      });
+    }
+    action.resetForm();
   };
 
   return (

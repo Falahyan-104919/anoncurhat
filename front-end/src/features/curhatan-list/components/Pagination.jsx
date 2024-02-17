@@ -61,9 +61,6 @@ export default function CustPagination({
   const pagesToDisplay = endPage - startPage + 1;
 
   if (pagesToDisplay < 1 || !Number.isInteger(pagesToDisplay)) {
-    console.error(
-      'Invalid pagesToDisplay value. Check the totalPages and currentPage values.'
-    );
     return null;
   }
 

@@ -46,6 +46,7 @@ export const authSlice = createSlice({
         state.gender = user_data['gender'];
         state.age = calculateAge(user_data['date_of_birth']);
         state.role = user_data['role'];
+        state.token = token;
         axiosInstance.interceptors.request.use(
           (config) => {
             config.headers['Authorization'] = token;
@@ -66,6 +67,7 @@ export const authSlice = createSlice({
         delete state.gender;
         delete state.age;
         delete state.role;
+        delete state.token;
         localStorage.removeItem('authState');
       });
   },

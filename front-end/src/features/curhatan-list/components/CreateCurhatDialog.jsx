@@ -11,11 +11,9 @@ import CreateCurhatForm from './CreateCurhatForm';
 import { useState } from 'react';
 
 export default function CreateCurhatDialog() {
-  const [isOpen, setIsOpen] = useState(false); // State to track if the dialog is open
-
+  const [isOpen, setIsOpen] = useState(false);
   const handleModal = () => {
-    console.log('test');
-    setIsOpen((prev) => !prev); // Function to open the dialog
+    setIsOpen((prev) => !prev);
   };
 
   return (

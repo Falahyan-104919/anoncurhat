@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Button } from './ui/button';
 import LoginDialog from '@/features/authentication/components/LoginDialog';
 import UserDropdownMenu from './DropdownMenu';
+import CreateCurhatDialog from '@/features/curhatan-list/components/CreateCurhatDialog';
 
 export default function Navbar() {
   const authState = useSelector((state) => state.auth);
@@ -13,6 +14,7 @@ export default function Navbar() {
       </h1>
       {isLoggedIn ? (
         <div className="flex flex-row items-center justify-between gap-4 pr-4">
+          <CreateCurhatDialog />
           <UserDropdownMenu />
         </div>
       ) : (

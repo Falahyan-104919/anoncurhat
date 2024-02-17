@@ -24,14 +24,28 @@ const getPosts = async (req, res) => {
     const limit = parseInt(req.query.limit) || 12;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
+
+    const includes = [
+      {
+        model: db.Users,
+        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+      },
+    ];
+
+    if (req.idUser) {
+      includes.push({
+        model: db.Likes,
+        where: { user_id: req.idUser },
+        required: false,
+      });
+    }
+
     const posts = await db.Posts.findAll({
       where: {
         active: true,
       },
-      include: {
-        model: db.Users,
-        attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
-      },
+      include: includes,
+      order: [['createdAt', 'DESC']],
     });
     const result = {
       posts: posts.slice(startIndex, endIndex),

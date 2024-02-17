@@ -22,8 +22,18 @@ const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 12;
+    const sort = req.query.sort || 'newest';
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
+
+    let order;
+    if (sort === 'newest') {
+      order = [['createdAt', 'DESC']];
+    } else if (sort === 'hottest') {
+      order = db.sequelize.literal(`(count_likes + count_comments) DESC`);
+    } else {
+      order = [['createdAt', 'DESC']];
+    }
 
     const includes = [
       {
@@ -45,7 +55,7 @@ const getPosts = async (req, res) => {
         active: true,
       },
       include: includes,
-      order: [['createdAt', 'DESC']],
+      order: order,
     });
     const result = {
       posts: posts.slice(startIndex, endIndex),

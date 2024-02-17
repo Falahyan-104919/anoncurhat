@@ -9,7 +9,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-export default function CustPagination({
+export default function HottestPagination({
   totalPages,
   currentPage,
   toggleRefetch,
@@ -19,8 +19,8 @@ export default function CustPagination({
 
   const handlePageChange = (page) => {
     console.log('clicked handle page change', page);
-    navigate(`?page=${page}`);
-    queryClient.invalidateQueries(['curhatan', page]);
+    navigate(`/hottest?page=${page}`);
+    queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -28,8 +28,8 @@ export default function CustPagination({
   const handlePreviousPage = (page) => {
     if (page == 0) return;
     console.log('clicked handle prev', page);
-    navigate(`?page=${page}`);
-    queryClient.invalidateQueries(['curhatan', page]);
+    navigate(`/hottest?page=${page}`);
+    queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -37,8 +37,8 @@ export default function CustPagination({
   const handleNextPage = (page) => {
     if (page == totalPages + 1) return;
     console.log('clicked handle next', page);
-    navigate(`?page=${page}`);
-    queryClient.invalidateQueries(['curhatan', page]);
+    navigate(`/hottest?page=${page}`);
+    queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

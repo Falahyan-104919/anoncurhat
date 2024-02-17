@@ -1,9 +1,8 @@
-import { useLocation } from 'react-router-dom';
 import axiosInstance from '../../../utils/axios';
 
-const getCurhatan = async (page = 1) => {
+const getCurhatan = async (page = 1, sortMethod) => {
   const list = await axiosInstance
-    .get(`posts?page=${page}`)
+    .get(`posts?sort=${sortMethod}&page=${page}`)
     .then((res) => res.data)
     .catch((err) => err.data.message);
   return list;

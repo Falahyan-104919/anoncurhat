@@ -12,6 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route index element={<CurhatanListContainer />} />
+          <Route path="newest" element={<CurhatanListContainer />} />
+          <Route path="hottest" element={<CurhatanListContainer />} />
         </Route>
       </Routes>
     </QueryClientProvider>

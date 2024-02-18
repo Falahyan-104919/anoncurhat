@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { Button } from './ui/button';
 import LoginDialog from '@/features/authentication/components/LoginDialog';
+import RegistrationDialog from '@/features/authentication/components/RegistrationDialog';
 import UserDropdownMenu from './DropdownMenu';
 
 export default function Navbar() {
@@ -19,7 +19,7 @@ export default function Navbar() {
         <div className="flex flex-row items-center justify-between gap-4 pr-4">
           <LoginDialog />
           <p className="text-white">or</p>
-          <Button variant="secondary"> Sign Up </Button>
+          <RegistrationDialog />
         </div>
       )}
     </div>

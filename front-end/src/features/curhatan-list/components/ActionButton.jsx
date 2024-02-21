@@ -1,4 +1,14 @@
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { MessageSquareText, ThumbsUp } from 'lucide-react';
 
 export default function CurhatActionButton({ post }) {
@@ -19,7 +29,13 @@ export default function CurhatActionButton({ post }) {
         </Button>
       </div>
       <div>
-        <Button size="sm">Read More</Button>
+        <Dialog>
+          <DialogTrigger asChild>
+          <Button size="sm">Read More</Button>
+          </DialogTrigger>
+
+        </Dialog>
+       
       </div>
     </div>
   );

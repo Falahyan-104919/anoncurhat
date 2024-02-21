@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route index element={<CurhatanListContainer />} />
-          <Route path="post/:id" element={<Post />} />
+          <Route path="post/:id" element={<PostListContainer />} />
           <Route path="newest" element={<CurhatanListContainer />} />
           <Route path="hottest" element={<CurhatanListContainer />} />
         </Route>

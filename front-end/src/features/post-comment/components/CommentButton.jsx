@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
  
-export function TextareaWithButton() {
+export function CommentButton() {
   return (
     <div className="grid w-full gap-2">
       <Textarea placeholder="Type your message here." />

@@ -46,7 +46,16 @@ export const authSlice = createSlice({
         state.gender = user_data['gender'];
         state.age = calculateAge(user_data['date_of_birth']);
         state.role = user_data['role'];
-        axiosInstance.defaults.headers.common['Authorization'] = token;
+        state.token = token;
+        axiosInstance.interceptors.request.use(
+          (config) => {
+            config.headers['Authorization'] = token;
+            return config;
+          },
+          (err) => {
+            return Promise.reject(err);
+          }
+        );
         const serializedState = JSON.stringify(state);
         localStorage.setItem('authState', serializedState);
       })
@@ -58,7 +67,7 @@ export const authSlice = createSlice({
         delete state.gender;
         delete state.age;
         delete state.role;
-        delete axiosInstance.defaults.headers.common['Authorization'];
+        delete state.token;
         localStorage.removeItem('authState');
       });
   },

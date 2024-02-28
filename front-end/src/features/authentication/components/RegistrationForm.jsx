@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '@/utils/axios';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ export default function RegistrationForm() {
     gender: '',
     date_of_birth: '',
   });
+  const { toast } = useToast();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,13 +19,30 @@ export default function RegistrationForm() {
     }));
   };
 
+  const resetFormData = () => {
+    setFormData({
+      username: '',
+      password: '',
+      gender: '',
+      date_of_birth: '',
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('users', formData);
-      console.log(response.data);
+      await axiosInstance.post('users', formData);
+      resetFormData();
+      return toast({
+        title: 'Registration Successfull',
+        variant: 'success',
+      });
     } catch (error) {
-      console.error('Registration failed:', error);
+      return toast({
+        title: 'Registration Failed',
+        description: `Registration Failed, ${error.response.data.message}`,
+        variant: 'error',
+      });
     }
   };
 

@@ -40,7 +40,7 @@ export default function RegistrationForm() {
     } catch (error) {
       return toast({
         title: 'Registration Failed',
-        description: `Registration Failed, ${error.response.data.message}`,
+        description: `${error.response.data.message}`,
         variant: 'error',
       });
     }

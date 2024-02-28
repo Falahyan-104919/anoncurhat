@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import axiosInstance from '@/utils/axios';
 import { useToast } from '@/components/ui/use-toast';
+import { useDispatch } from 'react-redux';
+import { login } from '../hooks/authSlice';
 
 export default function RegistrationForm() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -32,6 +35,7 @@ export default function RegistrationForm() {
     e.preventDefault();
     try {
       await axiosInstance.post('users', formData);
+      dispatch(login(formData));
       resetFormData();
       return toast({
         title: 'Registration Successfull',

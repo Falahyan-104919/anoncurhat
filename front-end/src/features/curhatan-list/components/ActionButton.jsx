@@ -1,12 +1,6 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { MessageSquareText, ThumbsUp } from 'lucide-react';
@@ -15,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 export default function CurhatActionButton({ post }) {
   const navigate = useNavigate();
   const handleReadMoreClick = () => {
-    navigate(`/post/${post.id}`);
+    console.log(post, "curhatactionbutton" );
+    navigate(`/post/${post.id_post}`);
   };
 
 

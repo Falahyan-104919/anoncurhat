@@ -1,5 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Users, { foreignKey: 'user_id' });
-      this.belongsTo(models.Posts, { foreignKey: 'post_id' });
+      this.belongsTo(models.Users, { foreignKey: "user_id" });
+      this.belongsTo(models.Posts, { foreignKey: "post_id" });
     }
   }
   Comments.init(
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         allowNull: false,
-        defaultValue: sequelize.literal('uuid_generate_v4()'),
+        defaultValue: sequelize.literal("uuid_generate_v4()"),
       },
       content: {
         type: DataTypes.TEXT,
@@ -33,21 +33,21 @@ module.exports = (sequelize, DataTypes) => {
       user_id: {
         type: DataTypes.UUID,
         references: {
-          model: 'users',
-          key: 'id_user',
+          model: "users",
+          key: "id_user",
         },
       },
       post_id: {
         type: DataTypes.UUID,
         references: {
-          model: 'posts',
-          key: 'id_post',
+          model: "posts",
+          key: "id_post",
         },
       },
     },
     {
       sequelize,
-      modelName: 'Comments',
+      modelName: "Comments",
     }
   );
   return Comments;

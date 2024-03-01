@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const authRoutes = require('./routes.auth');
-const userRoutes = require('./route.users');
-const postRoutes = require('./routes.posts');
-const commentRoutes = require('./routes.comments');
-const reportRoutes = require('./routes.reports');
-const likeRoutes = require('./routes.likes');
-const reportTypeRoutes = require('./route.report-type');
+const authRoutes = require("./routes.auth");
+const userRoutes = require("./route.users");
+const postRoutes = require("./routes.posts");
+const commentRoutes = require("./routes.comments");
+const reportRoutes = require("./routes.reports");
+const likeRoutes = require("./routes.likes");
+const reportTypeRoutes = require("./route.report-type");
 
 router.use(authRoutes);
 router.use(userRoutes);

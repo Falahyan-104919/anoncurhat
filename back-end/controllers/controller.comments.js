@@ -1,4 +1,4 @@
-const db = require('../db/models');
+const db = require("../db/models");
 
 const getComments = async (req, res) => {
   try {
@@ -10,14 +10,15 @@ const getComments = async (req, res) => {
       },
       include: {
         model: db.Users,
-        attributes: { exclude: ['password', 'updatedAt', 'createdAt'] },
+        attributes: { exclude: ["password", "updatedAt", "createdAt"] },
       },
+      order: [["createdAt", "desc"]],
     });
     res.status(200).json(comments);
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: 'Internal Server Error',
+      message: "Internal Server Error",
     });
   }
 };
@@ -36,15 +37,12 @@ const createComments = async (req, res) => {
       { where: { id_post: post_id } }
     );
     res.status(200).json({
-      message: 'Comment successfull Added',
-    });
-    res.status(200).json({
-      message: 'Comment successfull added with ',
+      message: "Comment successfull Added",
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: 'Internal Server Error',
+      message: "Internal Server Error",
     });
   }
 };
@@ -54,12 +52,12 @@ const deleteComments = async (req, res) => {
     const { id } = req.params;
     await db.Comments.update({ active: false }, { where: { id_comment: id } });
     res.status(200).json({
-      message: 'Deleting Comment Success',
+      message: "Deleting Comment Success",
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: 'Internal Server Error',
+      message: "Internal Server Error",
     });
   }
 };

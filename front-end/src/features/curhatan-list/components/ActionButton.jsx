@@ -11,10 +11,11 @@ export default function CurhatActionButton({ post }) {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const alreadyLiked = post['Likes']?.length ?? 0;
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const handleReadMoreClick = () => {
     navigate(`/post/${post.id_post}`);
   };
-  const { isLoggedIn } = useSelector((state) => state.auth);
   const { mutate } = useMutation({
     mutationKey: ['like-post', post.id_post],
     mutationFn: (id) => axiosInstance.post('likes', { post_id: id }),
@@ -37,11 +38,16 @@ export default function CurhatActionButton({ post }) {
   return (
     <div className="flex justify-between flex-grow">
       <div className="flex gap-4">
-        {post['Likes']?.length === 0 ? (
+        {alreadyLiked === 0 ? (
           <Button
             variant="like"
-            disabled={!isLoggedIn}
-            onClick={() => mutate(post.id_post)}
+            onClick={
+              isLoggedIn
+                ? () => mutate(post.id_post)
+                : () => {
+                    return document.getElementById('sign-in-button').click();
+                  }
+            }
           >
             <div className="flex items-center gap-2 text-md">
               <ThumbsUp size="24px" />

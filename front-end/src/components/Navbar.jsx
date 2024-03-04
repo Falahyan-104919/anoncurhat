@@ -24,7 +24,7 @@ export default function Navbar() {
         </div>
       ) : (
         <div className="flex flex-row items-center justify-between gap-4 pr-4">
-          <LoginDialog id="login" />
+          <LoginDialog />
           <p className="text-white">or</p>
           <RegistrationDialog />
         </div>

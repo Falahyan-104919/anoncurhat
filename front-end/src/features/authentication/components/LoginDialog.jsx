@@ -12,7 +12,9 @@ export default function LoginDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary">Sign In</Button>
+        <Button variant="secondary" id="sign-in-button">
+          Sign In
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

@@ -8,6 +8,7 @@ const routes = require('./routes/index.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use('/public', express.static('public'));
 
 app.use('/', routes);
 

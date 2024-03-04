@@ -4,7 +4,7 @@ import getCurhatan from './hooks/getCurhatan';
 import CustPagination from './components/NewestPagination';
 import { useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BarChart3, History } from 'lucide-react';
+import { BarChart3, Frown, History } from 'lucide-react';
 import NewestPagination from './components/NewestPagination';
 import HottestPagination from './components/HottestPagination';
 
@@ -15,6 +15,7 @@ export default function CurhatanListContainer() {
   const {
     data: newest,
     isLoading: loadingNewest,
+    isFetched: isFetchedNewest,
     refetch: refetchNewest,
   } = useQuery({
     queryKey: ['newest_curhatan', currentPage],
@@ -23,6 +24,7 @@ export default function CurhatanListContainer() {
   const {
     data: hottest,
     isLoading: loadingHottest,
+    isFetched: isFetchedHottest,
     refetch: refetchHottest,
   } = useQuery({
     queryKey: ['hottest_curhatan', currentPage],
@@ -30,6 +32,20 @@ export default function CurhatanListContainer() {
   });
   const newestTotalPages = newest?.totalPages;
   const hottestTotalPages = hottest?.totalPages;
+
+  if (isFetchedHottest && isFetchedNewest) {
+    if (newest['posts'].length == 0 && hottest['posts'].length == 0) {
+      return (
+        <div className="flex flex-col gap-4 items-center justify-center h-screen bg-zinc-950">
+          <Frown color="white" size="80px" />
+          <h1 className="text-7xl font-bold text-white tracking-tight">
+            There's No Posts Yet!
+          </h1>
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="flex justify-center bg-zinc-950">
       <Tabs defaultValue="newest">

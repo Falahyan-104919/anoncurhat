@@ -12,6 +12,7 @@ import {
 import { logout } from '@/features/authentication/hooks/authSlice';
 import { Menu } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function UserDropdownMenu() {
   const authState = useSelector((state) => state.auth);
@@ -28,8 +29,9 @@ export default function UserDropdownMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>My Posts</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <Link to="setting_profile/account_information">
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => dispatch(logout())}>

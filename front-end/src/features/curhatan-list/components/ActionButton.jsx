@@ -1,7 +1,19 @@
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { MessageSquareText, ThumbsUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CurhatActionButton({ post }) {
+  const navigate = useNavigate();
+  const handleReadMoreClick = () => {
+    console.log(post, "curhatactionbutton" );
+    navigate(`/post/${post.id_post}`);
+  };
+
+
   return (
     <div className="flex justify-between flex-grow">
       <div className="flex gap-4">
@@ -19,7 +31,14 @@ export default function CurhatActionButton({ post }) {
         </Button>
       </div>
       <div>
-        <Button size="sm">Read More</Button>
+        <Dialog>
+          <DialogTrigger asChild>
+          <Button size="sm" onClick={handleReadMoreClick}>Read More</Button>
+          </DialogTrigger>
+         
+
+        </Dialog>
+       
       </div>
     </div>
   );

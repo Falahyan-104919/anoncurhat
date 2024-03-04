@@ -21,7 +21,8 @@ const likeController = {
 
   addLike: async (req, res) => {
     try {
-      const { user_id, post_id } = req.body;
+      const user_id = req.idUser;
+      const { post_id } = req.body;
       const user = await db.Users.findByPk(user_id);
       const post = await db.Posts.findByPk(post_id);
       if (!user || !post) {
@@ -32,6 +33,19 @@ const likeController = {
         user_id: user_id,
         post_id: post_id,
       });
+      const { count } = await db.Likes.findAndCountAll({
+        where: {
+          post_id: post_id,
+        },
+      });
+      await db.Posts.update(
+        { count_likes: count },
+        {
+          where: {
+            id_post: post_id,
+          },
+        }
+      );
       return res.status(201).json(newLike);
     } catch (error) {
       console.error(error);

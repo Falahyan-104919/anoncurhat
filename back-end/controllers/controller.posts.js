@@ -75,13 +75,24 @@ const getPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
   try {
+    console.log('USER ID : ', req.idUser);
     const { id } = req.params;
-    const post = await db.Posts.findOne({
-      where: { id_post: id },
-      include: {
+    const includes = [
+      {
         model: db.Users,
         attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       },
+    ];
+    if (req.idUser) {
+      includes.push({
+        model: db.Likes,
+        where: { user_id: req.idUser },
+        required: false,
+      });
+    }
+    const post = await db.Posts.findOne({
+      where: { id_post: id },
+      include: includes,
     });
     if (!post) {
       return res.status(404).json({

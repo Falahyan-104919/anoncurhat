@@ -37,7 +37,7 @@ export default function CurhatActionButton({ post }) {
   return (
     <div className="flex justify-between flex-grow">
       <div className="flex gap-4">
-        {post['Likes'].length === 0 ? (
+        {post['Likes']?.length === 0 ? (
           <Button
             variant="like"
             disabled={!isLoggedIn}

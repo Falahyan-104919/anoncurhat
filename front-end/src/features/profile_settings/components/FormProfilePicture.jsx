@@ -11,23 +11,28 @@ import { useSelector } from 'react-redux';
 
 export default function FormProfilePicture() {
   const { user_id } = useSelector((state) => state.auth);
-  const toast = useToast();
+  const { toast } = useToast();
   const [profilePicture, setProfilePicture] = useState({});
   const { mutate } = useMutation({
     mutationKey: ['upload_profile_pic'],
     mutationFn: (value) => axiosInstance.post('/profile_picture', value),
     onSuccess: () => {
-      toast({
+      return toast({
         title: 'Upload Profile Pictures Successfull ✅',
         variant: 'success',
+      });
+    },
+    onError: () => {
+      return toast({
+        title: 'Failed Upload Profile Pictures ⛔️',
+        variant: 'error',
       });
     },
   });
   const submitProfilePic = async (file) => {
     const fd = new FormData();
     fd.append('profile_picture', file, file.name);
-    console.log(fd);
-    return mutate(fd);
+    mutate(fd);
   };
   return (
     <div>

@@ -3,7 +3,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ProfilePicture extends Model {
     static associate(models) {
-      this.belongsTo(models.Users), { foreignKey: 'user_id' };
+      this.belongsTo(models.Users, { foreignKey: 'user_id' });
     }
   }
   ProfilePicture.init(
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       user_id: {
         type: DataTypes.UUID,
         references: {
-          models: 'users',
+          models: 'Users',
           key: 'id_user',
         },
       },

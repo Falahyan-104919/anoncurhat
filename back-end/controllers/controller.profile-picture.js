@@ -9,7 +9,7 @@ const uploadProfilePicture = async (req, res) => {
       filepath: path,
       filename: filename,
     });
-    res.status(201).json({ message: 'Successfully Upload Profile Image' });
+    res.status(200).json({ message: 'Successfully Upload Profile Image' });
   } catch (err) {
     console.error(err);
     res.status(500).json({

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import FormProfilePicture from './FormProfilePicture';
 import { useSelector } from 'react-redux';
 import axiosInstance from '@/utils/axios';
@@ -16,8 +16,11 @@ import {
 import { SelectValue } from '@radix-ui/react-select';
 import { capitalizeGender } from '@/utils/helper';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function FormAccountInformation() {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
   const { user_id } = useSelector((state) => state.auth);
   const fetchAccInfo = async (id) => {
     const res = await axiosInstance
@@ -30,18 +33,39 @@ export default function FormAccountInformation() {
     queryKey: ['account_info', user_id],
     queryFn: () => fetchAccInfo(user_id),
   });
+  const { mutate } = useMutation({
+    mutationKey: ['update_user', user_id],
+    mutationFn: (values) => axiosInstance.put(`users/${user_id}`, values),
+    onSuccess: () => {
+      queryClient.invalidateQueries('account_info');
+      return toast({
+        title: 'Successfully Updated Account Information',
+        variant: 'success',
+      });
+    },
+    onError: (err) => {
+      return toast({
+        title: 'Failed to Update Account Information',
+        description: `${err}`,
+        variant: 'error',
+      });
+    },
+  });
   if (isFetched) {
     const validationSchema = Yup.object().shape({
       username: Yup.string().required('Username is Required'),
       gender: Yup.string()
         .required('Gender is required')
-        .oneOf(['Male', 'Female']),
+        .oneOf(['male', 'female']),
       date_of_birth: Yup.date().required('Date of Birth is Required'),
     });
     const initialValue = {
       username: data.username,
       gender: data.gender,
       date_of_birth: data.date_of_birth,
+    };
+    const handleSubmit = async (values, actions) => {
+      return mutate(values);
     };
     return (
       <div className="flex flex-col gap-8 p-8">
@@ -52,6 +76,7 @@ export default function FormAccountInformation() {
         <Formik
           initialValues={initialValue}
           validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
           {({ isSubmitting, values, isValid, errors, touched }) => (
             <Form autoComplete="off">
@@ -67,10 +92,7 @@ export default function FormAccountInformation() {
                       values={data.username}
                     />
                     {errors.username && touched.username ? (
-                      <Label
-                        forHtml="username"
-                        className="text-red-500 text-right"
-                      >
+                      <Label className="text-red-500 text-right">
                         {errors.username}
                       </Label>
                     ) : null}
@@ -78,10 +100,15 @@ export default function FormAccountInformation() {
                 )}
               </Field>
               <Field name="gender">
-                {({ field }) => (
+                {({ field, form }) => (
                   <div className="flex gap-4 items-center mt-8">
                     <Label className="mr-9">Gender</Label>
-                    <Select {...field} name="gender">
+                    <Select
+                      value={field.value}
+                      onValueChange={(value) =>
+                        form.setFieldValue('gender', value)
+                      }
+                    >
                       <SelectTrigger className="text-black max-w-[480px]">
                         <SelectValue
                           placeholder="Pick a Gender"
@@ -95,6 +122,11 @@ export default function FormAccountInformation() {
                         </SelectGroup>
                       </SelectContent>
                     </Select>
+                    {errors.gender && touched.gender ? (
+                      <Label className="text-red-500 text-right">
+                        {errors.gender}
+                      </Label>
+                    ) : null}
                   </div>
                 )}
               </Field>
@@ -112,7 +144,9 @@ export default function FormAccountInformation() {
                 )}
               </Field>
               <div className="flex justify-center mt-5 ml-[56px]">
-                <Button variant="secondary">Submit</Button>
+                <Button variant="secondary" type="submit">
+                  Submit
+                </Button>
               </div>
             </Form>
           )}

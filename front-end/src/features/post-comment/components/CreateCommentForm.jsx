@@ -34,14 +34,11 @@ export default function CreateCommentForm({ postId }) {
   });
 
   const handleSubmit = (values, action) => {
-  
     const payload = {
       user_id,
-      post_id : postId,
+      post_id: postId,
       content: values.content,
     };
-
-// return console.log (payload);
 
     mutate(payload);
     if (isError) {
@@ -71,18 +68,18 @@ export default function CreateCommentForm({ postId }) {
                     <Label htmlFor="content" className="text-red-600">
                       Content is Required
                     </Label>
-                    
                   ) : null}
                   <Button
-                type="submit"
-                disabled={isSubmitting || !isValid || !dirty}
-              >
-                <SquarePen size="18px" style={{ marginRight: '8px' }} /> Submit
-              </Button>
+                    type="submit"
+                    disabled={isSubmitting || !isValid || !dirty}
+                    className="mt-4"
+                  >
+                    <SquarePen size="18px" style={{ marginRight: '8px' }} />{' '}
+                    Submit
+                  </Button>
                 </div>
               )}
             </Field>
-            
           </div>
         </Form>
       )}

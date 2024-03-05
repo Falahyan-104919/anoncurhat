@@ -18,7 +18,6 @@ export default function HottestPagination({
   const navigate = useNavigate();
 
   const handlePageChange = (page) => {
-    console.log('clicked handle page change', page);
     navigate(`/hottest?page=${page}`);
     queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();
@@ -27,7 +26,6 @@ export default function HottestPagination({
 
   const handlePreviousPage = (page) => {
     if (page == 0) return;
-    console.log('clicked handle prev', page);
     navigate(`/hottest?page=${page}`);
     queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();
@@ -36,7 +34,6 @@ export default function HottestPagination({
 
   const handleNextPage = (page) => {
     if (page == totalPages + 1) return;
-    console.log('clicked handle next', page);
     navigate(`/hottest?page=${page}`);
     queryClient.invalidateQueries(['hottest_curhatan', page]);
     toggleRefetch();

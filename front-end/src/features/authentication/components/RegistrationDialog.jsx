@@ -6,21 +6,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 
-export default function LoginDialog() {
+export default function RegistrationDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" id="sign-in-button">
-          Sign In
-        </Button>
+        <Button variant="secondary">Sign Up</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Log In</DialogTitle>
+          <DialogTitle>Register</DialogTitle>
         </DialogHeader>
-        <LoginForm />
+        <RegistrationForm />
       </DialogContent>
     </Dialog>
   );

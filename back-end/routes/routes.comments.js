@@ -5,10 +5,10 @@ const {
   createComments,
   deleteComments,
 } = require('../controllers/controller.comments');
-const { verifyToken } = require('../middleware/authToken');
+const { verifyToken2 } = require('../middleware/authToken');
 
-routes.get('/comments', getComments);
-routes.post('/comments', verifyToken, createComments);
-routes.delete('/comments/:id', verifyToken, deleteComments);
+routes.get('/comments', verifyToken2(true), getComments);
+routes.post('/comments', verifyToken2(), createComments);
+routes.delete('/comments/:id', verifyToken2(), deleteComments);
 
 module.exports = routes;

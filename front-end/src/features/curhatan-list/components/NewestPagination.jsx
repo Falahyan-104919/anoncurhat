@@ -18,7 +18,6 @@ export default function NewestPagination({
   const navigate = useNavigate();
 
   const handlePageChange = (page) => {
-    console.log('clicked handle page change', page);
     navigate(`/newest?page=${page}`);
     queryClient.invalidateQueries(['curhatan', page]);
     toggleRefetch();
@@ -27,7 +26,6 @@ export default function NewestPagination({
 
   const handlePreviousPage = (page) => {
     if (page == 0) return;
-    console.log('clicked handle prev', page);
     navigate(`/newest?page=${page}`);
     queryClient.invalidateQueries(['curhatan', page]);
     toggleRefetch();
@@ -36,7 +34,6 @@ export default function NewestPagination({
 
   const handleNextPage = (page) => {
     if (page == totalPages + 1) return;
-    console.log('clicked handle next', page);
     navigate(`/newest?page=${page}`);
     queryClient.invalidateQueries(['curhatan', page]);
     toggleRefetch();

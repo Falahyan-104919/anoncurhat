@@ -8,10 +8,12 @@ import { useToast } from '@/components/ui/use-toast';
 import { LogIn } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { login } from '@/features/authentication/hooks/authSlice';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const validationSchema = Yup.object().shape({
     username: Yup.string('Username Must Be String').required('Required'),
     password: Yup.string().required('Password is Required'),
@@ -25,6 +27,10 @@ export default function LoginForm() {
       .then((res) => {
         const { requestStatus } = res.meta;
         if (requestStatus == 'fulfilled') {
+          queryClient.invalidateQueries([
+            'newest_curhatan',
+            'hottest_curhatan',
+          ]);
           return toast({
             title: 'Authentication Successfull',
             description: `Welcome back ${res.meta.arg['username']}!`,

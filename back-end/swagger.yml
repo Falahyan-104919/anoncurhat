@@ -1,0 +1,443 @@
+openapi: 3.0.3
+info:
+  title: AnonCurhat - API v1.0
+  description: |-
+    AnonCurhat is online platform to post your feelings anonimously
+  version: 1.0.0
+servers:
+  - url: https://anoncurhat/api/v3
+tags:
+  - name: Auth
+    description: Authentication and Authorization
+  - name: Posts
+    description: Posts CRUD operations
+  - name: Comments
+    description: Comments CRUD operations
+  - name: Likes
+    description: Likes CRUD operations
+  - name: Users
+    description: Users CRUD operations
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: User Authentication
+      operationId: authLogin
+      requestBody:
+        description: User Credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The Username
+                password:
+                  type: string
+                  description: The Password
+      responses:
+        '200':
+          description: Authentication & Authorization Successfully
+        '500':
+          description: Internal Server Error
+  /posts:
+    get:
+      tags:
+        - Posts
+      summary: Returns list of active Post
+      operationId: getPosts
+      responses:
+        '200':
+          description: List of Posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posts'
+    post:
+      tags:
+        - Posts
+      summary: Add a new Posts
+      operationId: createCurhat
+      requestBody:
+        description: Newest data for Posts
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Posts'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /posts/{post_id}:
+    get:
+      tags:
+        - Posts
+      summary: Returns single Active Posts
+      operationId: getPostById
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+      responses:
+        '200':
+          description: 'Single Active Posts'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posts'
+    put:
+      tags:
+        - Posts
+      summary: 'Update an existing Posts'
+      operationId: updatePosts
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+      requestBody:
+        description: Newest data for Posts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Posts'
+      responses:
+        '200':
+          description: Single updated Posts
+    delete:
+      tags:
+        - Posts
+      summary: 'Delete a Post by ID'
+      operationId: deletePost
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+      responses:
+        '200':
+          description: Delete Single Posts
+  /comments:
+    get:
+      tags:
+        - Comments
+      summary: Get Comments By Post ID
+      parameters:
+        - in: query
+          name: post_id
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+      responses:
+        '200':
+          description: A list of Comments related to the specified Post.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comments'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - Comments
+      summary: Create new Comments to a Posts
+      operationId: createComments
+      requestBody:
+        description: Comment Content
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comments'
+      responses:
+        '200':
+          description: Successfully added new Comments
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Comments
+      summary: Delete a specific comment by its id
+      operationId: deleteComments
+      responses:
+        '200':
+          description: Successful delete Comments
+  /likes:
+    post:
+      tags:
+        - Likes
+      summary: Create a Likes to specific Posts
+      operationId: addLike
+      requestBody:
+        description: Likes Posts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Likes'
+      responses:
+        '200':
+          description: Successfully Like a Posts
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+        - Likes
+      summary: Fetch Likes Data from Specific Posts Id
+      operationId: getLikes
+      responses:
+        '200':
+          description: Successfull Get Likes Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Likes'
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Likes
+      summary: Unlike a Posts
+      operationId: removeLike
+      responses:
+        '200':
+          description: Successfull Unlike Posts
+        '500':
+          description: Internal Server Error
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get All Users Data
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successfully Get All Users Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - Users
+      summary: Users Registration
+      requestBody:
+        description: Users Credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+      responses:
+        '200':
+          description: Successfully Registered
+        '500':
+          description: Internal Server Error
+  /users/{user_id}:
+    get:
+      tags:
+        - Users
+      summary: Get Users Data
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+          required: true
+      responses:
+        '200':
+          description: Successfull Get Users Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+        - Users
+      summary: Edit Users Data
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+          required: true
+      responses:
+        '200':
+          description: Successfull Update Users Data
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Users
+      summary: Delete Users
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+          required: true
+      responses:
+        '200':
+          description: Successfully Delete Users Data
+        '500':
+          description: Internal Server Error
+  /users/change_password/{user_id}:
+    put:
+      tags:
+        - Users
+      summary: Users Change Password
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+            example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+          required: true
+      requestBody:
+        description: Users Credentials
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                  description: The Old Password
+                new_password:
+                  type: string
+                  description: The New Password
+      responses:
+        '200':
+          description: Successfully Change User Password
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    Users:
+      type: object
+      properties:
+        id_user:
+          type: string
+          example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+        username:
+          type: string
+          example: oranglampung1
+        password:
+          type: string
+          example: password
+        gender:
+          type: string
+          example: male
+          enum:
+            - male
+            - female
+        role:
+          type: string
+          example: user
+          enum:
+            - user
+            - admin
+        date_of_birth:
+          type: string
+          example: 2001-07-24
+          format: years-months-date
+        active:
+          type: boolean
+          example: true
+          enum:
+            - true
+            - false
+    Posts:
+      type: object
+      properties:
+        id_curhat:
+          type: string
+          example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+        content:
+          type: string
+          example: Culpa enim eu minim qui occaecat culpa reprehenderit eu aliquip. Aute laborum culpa do irure excepteur aliqua amet id ex excepteur dolore excepteur. Elit deserunt in Lorem incididunt id eiusmod cupidatat enim magna.
+        active:
+          type: boolean
+          example: true
+        count_like:
+          type: integer
+          example: 420
+        count_comment:
+          type: integer
+          example: 420
+        user_id:
+          $ref: '#/components/schemas/Users'
+        likes:
+          $ref: '#/components/schemas/Likes'
+    Comments:
+      type: object
+      properties:
+        id_comment:
+          type: string
+          example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+        content:
+          type: string
+          example: test comment
+        active:
+          type: boolean
+          example: true
+        user_id:
+          $ref: '#/components/schemas/Users'
+        post_id:
+          $ref: '#/components/schemas/Posts'
+    Likes:
+      type: object
+      properties:
+        id_like:
+          type: string
+          example: 20b94f36-0b3d-4ec6-8b05-e27a18b1265e
+        active:
+          type: boolean
+          example: true
+          enum:
+            - true
+            - false
+        post_id:
+          $ref: '#/components/schemas/Posts'
+        user_id:
+          $ref: '#/components/schemas/Users'

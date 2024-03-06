@@ -19,8 +19,7 @@ const CommentDeleteButton = ({ commentId, postId }) => {
     },
     {
       onSuccess: () => {
-        // After successful deletion, refetch the comments to update the UI
-        queryClient.invalidateQueries(['comments', postId]); // Invalidate the 'comments' query for the specific post
+        queryClient.invalidateQueries(['comments', postId]); 
       },
     }
   );

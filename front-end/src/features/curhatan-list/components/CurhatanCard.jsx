@@ -10,6 +10,10 @@ import { User } from 'lucide-react';
 import CurhatActionButton from './ActionButton';
 
 export default function CurhatanCard({ post }) {
+  console.log(post);
+  if (!post || !post.User) {
+    return null; // You can also render a placeholder or an error message
+  }
   return (
     <Card className="flex flex-col justify-between h-[255px] max-w-[385px]">
       <CardHeader>

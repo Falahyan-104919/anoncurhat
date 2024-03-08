@@ -5,7 +5,7 @@ info:
     AnonCurhat is online platform to post your feelings anonimously
   version: 1.0.0
 servers:
-  - url: https://anoncurhat/api/v3
+  - url: http://localhost:8888/
 tags:
   - name: Auth
     description: Authentication and Authorization

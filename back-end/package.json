@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
-    "prod": "nodemon app.js export NODE_ENV=production && npx sequelize-cli db:migrate"
+    "prod": "nodemon app.js export NODE_ENV=tai && npx sequelize-cli db:migrate"
   },
   "author": "FSW-1",
   "license": "ISC",

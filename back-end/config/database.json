@@ -20,7 +20,7 @@
   "production": {
     "username": "postgres",
     "password": "postgres",
-    "database": "anon_curhat",
+    "database": "anon_curhat_prod",
     "dialect": "postgres",
     "logging": false,
     "port": 5432

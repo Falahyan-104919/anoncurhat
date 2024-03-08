@@ -13,9 +13,13 @@ const routes = require('./routes/index.js');
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(cors());
+server.use(
+  cors({
+    origin: '*',
+  })
+);
 server.use('/public', express.static('public'));
 server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 server.use('/', routes);
 
-module.exports = { server }
+module.exports = { server };

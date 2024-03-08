@@ -22,6 +22,7 @@
     "password": "anon_curhat",
     "database": "anon_curhat",
     "dialect": "postgres",
+    "logging": false,
     "port": 5432
   }
 }

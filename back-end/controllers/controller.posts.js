@@ -76,7 +76,6 @@ const getPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
   try {
-    console.log('USER ID : ', req.idUser);
     const { id } = req.params;
     const includes = [
       {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authState = JSON.parse(localStorage.getItem('authState')) || false;
-const localhost = import.meta.env.VITE_VPS_ADDRESS;
+const localhost = import.meta.env.VITE_LOCAL;
 const axiosInstance = axios.create({
   baseURL: `http://${localhost}:8888/`,
   headers: {

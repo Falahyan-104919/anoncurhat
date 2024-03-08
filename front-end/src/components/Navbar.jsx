@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="flex flex-row items-center justify-between h-16 bg-zinc-950">
       <Link to="/">
-        <h1 className="scroll-m-20 text-3xl font-extrabold text-white tracking-tight pl-4 lg:text-3xl">
+        <h1 className="scroll-m-20 font-extrabold text-white tracking-tight pl-4 text-xl lg:text-3xl">
           anoncurhat.
         </h1>
       </Link>

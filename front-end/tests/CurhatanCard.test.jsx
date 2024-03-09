@@ -2,7 +2,7 @@ import CurhatanCard from '@/features/curhatan-list/components/CurhatanCard'
 import { render } from '@testing-library/react'
 import moment from 'moment';
 import { describe, it } from 'vitest'
-import { QueryClient, QueryClientProvider } from 'react-query';
+
 import { Post } from '@/components/ui/post';
 
 describe("CurhatanCard test", () => {

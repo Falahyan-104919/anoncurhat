@@ -28,6 +28,8 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/anon_curhat
+            cd ~/anon_curhat/front-end
+            npm install
+            cd ~/anon_curhat/back-end
             npm install
             pm2 restart all

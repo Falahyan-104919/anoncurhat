@@ -1,7 +1,6 @@
 import CurhatanCard from './CurhatanCard';
 import CurhatanCardSekeleton from './CurhatanCardSkeleton';
 
-
 export default function CurhatanList({ loading, data }) {
   return !loading ? (
     data['posts'].map((items, index) => {
@@ -9,6 +8,5 @@ export default function CurhatanList({ loading, data }) {
     })
   ) : (
     <CurhatanCardSekeleton />
-    
   );
 }

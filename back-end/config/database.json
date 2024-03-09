@@ -5,21 +5,24 @@
     "database": "anon_curhat",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "logging": false,
     "port": 5432
   },
   "test": {
     "username": "falahyan",
     "password": null,
-    "database": "anon_curhat",
+    "database": "anon_curhat_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "logging": false,
     "port": 5432
   },
   "production": {
-    "username": "falahyan",
+    "username": "postgres",
     "password": null,
     "database": "anon_curhat",
     "dialect": "postgres",
+    "logging": false,
     "port": 5432
   }
 }

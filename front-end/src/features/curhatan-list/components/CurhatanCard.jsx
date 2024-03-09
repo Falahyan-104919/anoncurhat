@@ -15,7 +15,7 @@ export default function CurhatanCard({ post }) {
     return null; // You can also render a placeholder or an error message
   }
   return (
-    <Card className="flex flex-col justify-between h-[255px] max-w-[385px]">
+    <Card className="flex flex-col justify-between h-[255px] max-w-[385px] mb-4">
       <CardHeader>
         <CardTitle className="flex gap-4 h-fit items-center">
           <User size="40px" />

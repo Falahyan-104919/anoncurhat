@@ -2,7 +2,8 @@ const db = require('../db/models');
 
 const createPost = async (req, res) => {
   try {
-    const { user_id, content } = req.body;
+    const user_id = req.idUser;
+    const { content } = req.body;
     const newPost = await db.Posts.create({
       user_id: user_id,
       content: content,
@@ -75,7 +76,6 @@ const getPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
   try {
-    console.log('USER ID : ', req.idUser);
     const { id } = req.params;
     const includes = [
       {

@@ -47,7 +47,7 @@ export default function CurhatanListContainer() {
   }
 
   return (
-    <div className="flex justify-center bg-zinc-950">
+    <div className="flex justify-center min-h-screen bg-zinc-950">
       <Tabs defaultValue="newest">
         <div className="flex flex-grow justify-center">
           <TabsList>
@@ -62,7 +62,7 @@ export default function CurhatanListContainer() {
           </TabsList>
         </div>
         <TabsContent value="newest">
-          <div className="grid grid-cols-3 sm:flex-row gap-8 p-8 items-center">
+          <div className="lg:grid lg:grid-cols-3 flex-col gap-8 p-8 items-center">
             <CurhatanList loading={loadingNewest} data={newest} />
             <div className="col-span-3 sm:w-full">
               <NewestPagination
@@ -74,7 +74,7 @@ export default function CurhatanListContainer() {
           </div>
         </TabsContent>
         <TabsContent value="hottest">
-          <div className="grid grid-cols-3 sm:flex-row gap-8 p-8 items-center">
+          <div className="lg:grid lg:grid-cols-3 flex-col gap-8 p-8 items-center">
             <CurhatanList loading={loadingHottest} data={hottest} />
             <div className="col-span-3 sm:w-full">
               <HottestPagination

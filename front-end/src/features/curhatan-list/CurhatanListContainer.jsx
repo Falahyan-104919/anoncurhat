@@ -47,7 +47,7 @@ export default function CurhatanListContainer() {
   }
 
   return (
-    <div className="flex justify-center bg-zinc-950">
+    <div className="flex justify-center min-h-screen bg-zinc-950">
       <Tabs defaultValue="newest">
         <div className="flex flex-grow justify-center">
           <TabsList>

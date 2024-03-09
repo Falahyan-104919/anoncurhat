@@ -1,0 +1,35 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: copy via ssh
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          post: 22
+          source: .,!node_modules
+          target: ~/anon_curhat
+      - name: deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
+          post: 2
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ~/anon_curhat/front-end
+            npm install
+            cd ~/anon_curhat/back-end
+            npm install
+            pm2 restart all

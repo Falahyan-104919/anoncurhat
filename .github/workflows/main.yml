@@ -10,7 +10,7 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
       - name: copy via ssh
-        uses: appleboy/scp-action@0.1.7
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -19,7 +19,7 @@ jobs:
           source: .,!node_modules
           target: ~/anon_curhat
       - name: deploy
-        uses: appleboy/ssh-action@0.1.7
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.PASSWORD }}

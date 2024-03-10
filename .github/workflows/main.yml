@@ -14,7 +14,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.KEY }}
           port: 22
           source: .,!node_modules
           target: ~/anon_curhat
@@ -22,8 +22,8 @@ jobs:
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.PASSWORD }}
-          password: ${{ secrets.PASSWORD }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
           port: 2
           script: |
             export NVM_DIR=~/.nvm

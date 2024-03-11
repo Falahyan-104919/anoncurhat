@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import CurhatanList from './components/CurhatanList';
 import getCurhatan from './hooks/getCurhatan';
-import CustPagination from './components/NewestPagination';
 import { useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BarChart3, Frown, History } from 'lucide-react';
